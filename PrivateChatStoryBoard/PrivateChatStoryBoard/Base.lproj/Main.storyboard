@@ -33,25 +33,68 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bhC-jE-zeM">
-                                <rect key="frame" x="0.0" y="381" width="393" height="90"/>
+                                <rect key="frame" x="0.0" y="406" width="393" height="40"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Phone Number" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="OmC-gn-1S7">
+                                        <rect key="frame" x="25" y="0.0" width="343" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="OTE-8g-d3R"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="done" enablesReturnKeyAutomatically="YES" textContentType="tel"/>
+                                    </textField>
+                                    <textField hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter OTP" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="afN-NN-WPn">
+                                        <rect key="frame" x="25" y="5" width="343" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="TDT-5w-9Cg"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="one-time-code"/>
+                                    </textField>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="90" id="SzJ-1D-aXC"/>
+                                    <constraint firstAttribute="trailing" secondItem="OmC-gn-1S7" secondAttribute="trailing" constant="25" id="1Mo-K7-nGf"/>
+                                    <constraint firstItem="OmC-gn-1S7" firstAttribute="leading" secondItem="bhC-jE-zeM" secondAttribute="leading" constant="25" id="6TL-F7-Wcc"/>
+                                    <constraint firstAttribute="trailing" secondItem="afN-NN-WPn" secondAttribute="trailing" constant="25" id="9RO-1e-JBc"/>
+                                    <constraint firstItem="afN-NN-WPn" firstAttribute="leading" secondItem="bhC-jE-zeM" secondAttribute="leading" constant="25" id="J0E-AR-3Ox"/>
+                                    <constraint firstAttribute="height" constant="40" id="SzJ-1D-aXC"/>
+                                    <constraint firstItem="OmC-gn-1S7" firstAttribute="top" secondItem="bhC-jE-zeM" secondAttribute="top" id="Vg8-dc-iNE"/>
+                                    <constraint firstAttribute="bottom" secondItem="afN-NN-WPn" secondAttribute="bottom" id="rXF-kR-otZ"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXr-hK-Zwp">
+                                <rect key="frame" x="25" y="471" width="343" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="Fpf-Tg-HjN"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Get OTP"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Get OTP"/>
+                                <connections>
+                                    <action selector="buttonContinue:" destination="wfG-eh-fNI" eventType="touchUpInside" id="whu-9p-H5F"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Nga-9i-0bc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Nga-9i-0bc" firstAttribute="trailing" secondItem="CXr-hK-Zwp" secondAttribute="trailing" constant="25" id="0a3-3r-Cd6"/>
                             <constraint firstItem="bhC-jE-zeM" firstAttribute="centerY" secondItem="hk9-9n-dMO" secondAttribute="centerY" id="4p2-Wr-aPo"/>
                             <constraint firstItem="bhC-jE-zeM" firstAttribute="leading" secondItem="Nga-9i-0bc" secondAttribute="leading" id="Ft0-2b-fcb"/>
                             <constraint firstItem="Nga-9i-0bc" firstAttribute="trailing" secondItem="bhC-jE-zeM" secondAttribute="trailing" id="TC3-wS-XFS"/>
+                            <constraint firstItem="CXr-hK-Zwp" firstAttribute="leading" secondItem="Nga-9i-0bc" secondAttribute="leading" constant="25" id="TU0-zw-Z41"/>
                             <constraint firstItem="bhC-jE-zeM" firstAttribute="centerX" secondItem="hk9-9n-dMO" secondAttribute="centerX" id="WHN-hi-h2L"/>
+                            <constraint firstItem="CXr-hK-Zwp" firstAttribute="top" secondItem="bhC-jE-zeM" secondAttribute="bottom" constant="25" id="gnz-FS-fnm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="PrivateChat" id="M4L-UM-lRS"/>
                     <connections>
+                        <outlet property="fieldHeight" destination="SzJ-1D-aXC" id="eNL-Z3-2PJ"/>
                         <outlet property="fieldView" destination="bhC-jE-zeM" id="q1e-f4-H9i"/>
+                        <outlet property="getOTP" destination="CXr-hK-Zwp" id="atd-Cg-HtC"/>
+                        <outlet property="otp" destination="afN-NN-WPn" id="sLa-H7-wYb"/>
+                        <outlet property="phoneNumber" destination="OmC-gn-1S7" id="J62-Pq-n2N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="92A-1M-fRs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
