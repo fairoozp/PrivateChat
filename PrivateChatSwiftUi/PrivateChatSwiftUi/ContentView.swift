@@ -9,77 +9,60 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
+    
+    @State var phoneNumber = ""
+    @State var otp = ""
+    @State var phoneValid = false
+    @State var otpValid = false
+    @State var fieldValid = false
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+            VStack{
+                Text("Private Chat")
+                    .font(.system(size: 22, weight: .semibold))
+                Spacer()
+                TextField("Enter Phone Number", text: $phoneNumber)
+                    .padding(.all, 10)
+                    .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(Color.black.opacity(0.5), style: StrokeStyle(lineWidth: 1.0)))
+                    .padding(.horizontal, 20)
+                    .padding(.top, 10)
+                    .font(.system(size: 20))
+                    .textContentType(.telephoneNumber)
+                    .keyboardType(.phonePad)
+                Spacer().frame(height: 20)
+                if phoneValid {
+                    SecureField("Enter OTP", text: $otp)
+                        .padding(.all, 10)
+                        .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(Color.black.opacity(0.5), style: StrokeStyle(lineWidth: 1.0)))
+                        .padding(.horizontal, 20)
+                        .font(.system(size: 20))
+                        .textContentType(.oneTimeCode)
+                        .keyboardType(.numberPad)
+                    Spacer().frame(height: 20)
+                }
+                Button(action: {
+                    if !phoneNumber.isEmpty {
+                        phoneValid = true
                     }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                    if !otp.isEmpty {
+                        otpValid = true
                     }
-                }
-            }
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+                    if otpValid && phoneValid {
+                        fieldValid = true
+                    }
+                }, label: {
+                    if phoneValid {
+                        Text("Verify OTP")
+                    } else {
+                        Text("Get OTP")
+                    }
+                })
+                Spacer()
+            }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         }
     }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
