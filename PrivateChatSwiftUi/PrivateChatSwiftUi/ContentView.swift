@@ -18,10 +18,14 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            VStack{
+            VStack(spacing: 0){
                 Text("Private Chat")
                     .font(.system(size: 22, weight: .semibold))
                 Spacer()
+                Text("Enter Phone Number")
+                    .foregroundColor(.gray)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 25)
                 TextField("Enter Phone Number", text: $phoneNumber)
                     .padding(.all, 10)
                     .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(Color.black.opacity(0.5), style: StrokeStyle(lineWidth: 1.0)))
@@ -32,6 +36,10 @@ struct ContentView: View {
                     .keyboardType(.phonePad)
                 Spacer().frame(height: 20)
                 if phoneValid {
+                    Text("Enter OTP")
+                        .foregroundColor(.gray)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 25)
                     SecureField("Enter OTP", text: $otp)
                         .padding(.all, 10)
                         .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(Color.black.opacity(0.5), style: StrokeStyle(lineWidth: 1.0)))
