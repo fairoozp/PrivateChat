@@ -40,6 +40,7 @@ struct ContentView: View {
                         .foregroundColor(.gray)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 25)
+                        .padding(.bottom, 5)
                     SecureField("Enter OTP", text: $otp)
                         .padding(.all, 10)
                         .overlay(RoundedRectangle(cornerRadius: 10.0).strokeBorder(Color.black.opacity(0.5), style: StrokeStyle(lineWidth: 1.0)))

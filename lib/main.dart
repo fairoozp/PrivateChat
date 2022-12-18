@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:private_chat_flutter/loginPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -61,6 +62,11 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void navigateToNextScreen(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => LoginPage()));
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -95,6 +101,13 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            MaterialButton(
+              onPressed: () => navigateToNextScreen(context),
+              color: Colors.blue,
+              child: const Text("Login Page",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white)),
+            ),
             const Text(
               'You have pushed the button this many times:',
             ),
